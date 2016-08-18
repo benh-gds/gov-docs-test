@@ -1,0 +1,137 @@
+// Custom changes to make more GOV.UK like
+
+html, body {
+	@include core-19;
+}
+
+#global-header .header-wrapper {
+	margin: 0;
+}
+
+.tocify-wrapper {
+	@include core-19;
+
+	ul, li {
+		line-height: 40px;
+	}
+	.docs-name {
+		img {
+			width: 50px;
+			float: left;
+		}
+		h3 {
+			@include bold-24;
+			float: left;
+		}
+		padding: 25px;
+		// height: 100px;
+		// display: none;
+	}
+	
+	position: fixed;
+	// top: 53px; //below GOV.UK header
+
+	border-right: 1px solid $panel-colour;
+
+	.tocify-focus {
+		// remove box shadow
+		box-shadow: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	.tocify-subheader {
+		.tocify-item>a{
+			@include core-16;
+			line-height: inherit !important;
+		}
+	}
+}
+
+.sticky {
+  position: fixed;
+  // width: 100%;
+  // left: 0;
+  top: 0;
+  // z-index: 100;
+  // border-top: 0;
+}
+
+table {
+	width: inherit;
+}
+
+aside {
+	clear: both;
+}
+
+
+
+.content {
+
+	.example {
+		h1, h2, h3, p {
+			border: none;
+		}
+		
+	}
+
+	h1{
+		background-image: none;
+		border-bottom: none;
+	}
+
+	h2 {
+		background-image: none;
+		margin-top: 1em;
+		border: 0;
+	}
+
+	h3 {
+		@include bold-24;
+		clear: both;
+	}
+	
+
+
+}
+
+.highlight {
+	background-color: transparent;
+}
+
+.docs-name{
+	@include bold-24;
+}
+
+.toc-footer{
+	display: none;
+}
+
+.content a {
+	color: $govuk-blue;
+}
+
+.sizer {
+	// margin-right: 30%;
+	width: 60%;
+	float: left;
+	padding: 0 28px;
+    box-sizing: border-box;
+    display: block;
+    text-shadow: 0px 0px 0px #fff;
+}
+
+.page-wrapper .dark-box, .content pre {
+	width: 40%;
+}
+
+pre > code {
+	white-space: pre-wrap;
+}
+
+input:focus {
+	outline: 3px solid $focus-colour;
+}
