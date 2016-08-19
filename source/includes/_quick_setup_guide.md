@@ -14,14 +14,15 @@ In order to provide you with an account, we need to store some personal data abo
 
 Government PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is, someone who is hosting an application on the PaaS), you will use the Cloud Foundry command line client to interact with the PaaS. To set it up:
 
-1. Download and install the <a href="https://github.com/cloudfoundry/cli#downloads" target="blank">Cloud Foundry CLI for your platform </a> [external page, opens in new tab]
-2. To check that it installed correctly, go to the Terminal/command line/Command Prompt and run this command.
+Download and install the <a href="https://github.com/cloudfoundry/cli#downloads" target="blank">Cloud Foundry CLI for your platform </a> [external page, opens in new tab]
 
-```
-cf -v
-```
+To check that it installed correctly, go to the Terminal/command line/Command Prompt and run this command:
 
-3. You should get a message like this, confirming the version that's installed (it may not be this exact version):
+    ```
+    $ cf -v
+    ```
+
+You should get a message like this, confirming the version that's installed (it may not be this exact version):
 
 ```
 cf version 6.18.1+a1103f0-2016-05-24
@@ -31,7 +32,7 @@ cf version 6.18.1+a1103f0-2016-05-24
 
 
 
-3. Log in by running:
+Log in by running:
 
     ```
     cf login -a api.cloud.service.gov.uk -u USERNAME

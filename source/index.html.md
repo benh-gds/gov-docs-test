@@ -11,6 +11,7 @@ language_tabs:
 includes:
   - before_you_start
   - quick_setup_guide
+  - deploying_rails
   - errors
   - limitations
   - privacy
