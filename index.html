@@ -1,0 +1,1437 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Example GOV.UK Tech Docs</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;CF cli&quot;]">
+    
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <!-- <p class="docs-name">GOV.UK Elements</p> -->
+      <div class="docs-name">
+        <img src="images/logo.png" />
+        <h3>GOV.UK</h3>
+      </div>
+      
+        <div class="lang-selector">
+              <a href="#" data-language-name="CF cli">CF cli</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li>Contact us at support@example.com</li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="generic-gov-uk-tech-docs">Generic GOV.UK tech docs</h1>
+
+<p>This is a prototype of how some technical docs would look, including API content.</p>
+
+<aside class="notice">This is not live documentation. Some extracts from documentation for GOV.UK services have been used for illustration purposes, but these may be wrong or out of date. Look at the official documentation for the service you are using.</aside> 
+
+          <p>To be hosted by Government PaaS, your application must:</p>
+
+<ul>
+<li>follow the <a href="http://12factor.net/">twelve-factor application</a> principles (described in more detail below) - this will be the case if your app was written to be deployed to another PaaS like Heroku</li>
+<li>not require any backing service apart from a database (currently the only service available is PostgreSQL)</li>
+<li>not carry data at SECRET or above (this is currently out of scope for Government PaaS)</li>
+<li>be written in a language supported by the <a href="http://docs.cloudfoundry.org/buildpacks/">default Cloud Foundry buildpacks</a>:
+
+<ul>
+<li>Go</li>
+<li>Nodejs</li>
+<li>Java</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+<li>or be a static HTML/CSS/Javascript site</li>
+</ul></li>
+</ul>
+
+<p>Buildpacks provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app&rsquo;s dependencies. Note that most buildpacks will support a limited range of versions of the language.</p>
+
+<h3 id="12-factor-application-principles">12-factor application principles</h3>
+
+<p>These principles were formulated by Adam Wiggins, the cofounder of the <a href="https://www.heroku.com/">Heroku</a> platform. They outline practices for modern apps to follow during development to make them scalable and easy to deploy. Your app must follow these practices to work on the Cloud Foundry technology which is used by the Government PaaS.</p>
+
+<p>We have summarised the practices in the table below, and noted the relevance of each principle to the Government PaaS.</p>
+
+<p>Visit the <a href="http://12factor.net/">12factor.net website</a> to further ensure your application supports these practices.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Principle</th>
+<th style="text-align: left">Meaning</th>
+<th style="text-align: left">Relevance to Cloud Foundry</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">One codebase many deploys</td>
+<td style="text-align: left">Each of your applications needs its own source-controlled repository.</td>
+<td style="text-align: left">You can push the same codebase to many Cloud Foundry applications with these commands: <code class="prettyprint">$ cf push myapp-staging</code> <br/> <code class="prettyprint">$ cf push myapp-production</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Isolate dependencies</td>
+<td style="text-align: left">All required dependencies (eg a database or image library) must be vendored into your software system.</td>
+<td style="text-align: left">If you don’t declare your dependencies, you probably won’t be able to deploy your application on Cloud Foundry. How you specify dependencies depends on which language and buildpack you use. For example, the python buildpack expects you to provide a requirements.txt file which it will pass to pip.</td>
+</tr>
+<tr>
+<td style="text-align: left">Store your configuration in the environment</td>
+<td style="text-align: left">Ensure you separate the storage of your code and configuration (this is anything that may vary between environments, such as passwords).</td>
+<td style="text-align: left">Cloud Foundry provides environment variables to tell an application how to configure itself, e.g. VCAP_SERVICES tells applications what services are available and how to connect to them. You can create your own environment variables for each application.</td>
+</tr>
+<tr>
+<td style="text-align: left">Backing Services</td>
+<td style="text-align: left">All your backing services (e.g. an email service or a monitoring system) should be loosely coupled to your code so you can easily change services if you need to. A change in service should not require a code change.</td>
+<td style="text-align: left">In Cloud Foundry, backing services are referred to as ‘services’. Users can create services, bind them to applications, and delete them.</td>
+</tr>
+<tr>
+<td style="text-align: left">Strictly separate build, release and run stages</td>
+<td style="text-align: left">There should be a strict separation between building, releasing and running the code.</td>
+<td style="text-align: left">The build stage is carried out by the buildpack and Cloud Foundry refers to this as ‘staging’ an app. Cloud Foundry combines the release and run stage into a single &lsquo;push&rsquo; stage.</td>
+</tr>
+<tr>
+<td style="text-align: left">Stateless processes</td>
+<td style="text-align: left">Build stateless applications where intermediate data is stored in your backing services (eg your databases) and not in your running code. Also, have you applications run on many servers so you can ensure continuity in the event of server downtime.</td>
+<td style="text-align: left">Cloud Foundry treats all application processes are stateless and expendable.</td>
+</tr>
+<tr>
+<td style="text-align: left">Port binding</td>
+<td style="text-align: left">Your application should interface to the world via an API. You can have a separate URL for your customers than the one you use for internal calls. This means your app can be used as a backing service for another app via its URL.</td>
+<td style="text-align: left">Cloud Foundry expects applications to have this and provides an environment variable called PORT for the application to use as part of its bootstrapping process.</td>
+</tr>
+<tr>
+<td style="text-align: left">Concurrency</td>
+<td style="text-align: left">Ensure all your processes (e.g. web requests or API calls) are running separately so your application can scale easily.</td>
+<td style="text-align: left">Cloud Foundry expects applications to behave according to this principle. To increase the number of processes running, use the <code class="prettyprint">cf scale</code> command.</td>
+</tr>
+<tr>
+<td style="text-align: left">Disposability</td>
+<td style="text-align: left">You should be able to rapidly release new code. Also, applications should be able to start back up fast and cleanly following shut down.</td>
+<td style="text-align: left">Cloud Foundry expects applications to follow this principle.</td>
+</tr>
+<tr>
+<td style="text-align: left">Development parity</td>
+<td style="text-align: left">Applications should be rapidly deployed from their development environment to production.  To ensure this rapid deployment, keep a developer’s environment similar to that of production (eg both environments should use the same backing services).</td>
+<td style="text-align: left">CF helps you achieve this development/production parity by letting you create and deploy similar services for development, test and production environments</td>
+</tr>
+<tr>
+<td style="text-align: left">Logs</td>
+<td style="text-align: left">Maintain and archive log files so you have visibility of how your application works over time.</td>
+<td style="text-align: left">Cloud Foundry <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html">describes how to log files here</a>. PaaS will offer the Loggregator function in beta.</td>
+</tr>
+<tr>
+<td style="text-align: left">Administrative processes</td>
+<td style="text-align: left">Run one-off administrative processes (eg running analytics) in your production environment.</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+          <h1 id="sample-docs">Sample docs</h1>
+
+<h2 id="getting-an-account">Getting an account</h2>
+
+<p>Government PaaS is currently in private beta.</p>
+
+<p>If your organisation is taking part in the private beta and you need an account, or you&rsquo;d like to find about taking part in the beta, please contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<p>In order to provide you with an account, we need to store some personal data about you. Please see <a href="/getting_started/privacy">our Privacy Policy</a> for details.</p>
+
+<aside class="warning">This is an example warning! Be careful.</aside>
+
+<h2 id="setting-up-the-command-line">Setting up the command line</h2>
+
+<p>Government PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is, someone who is hosting an application on the PaaS), you will use the Cloud Foundry command line client to interact with the PaaS. To set it up:</p>
+
+<p>Download and install the <a href="https://github.com/cloudfoundry/cli#downloads" target="blank">Cloud Foundry CLI for your platform </a> [external page, opens in new tab]</p>
+
+<p>To check that it installed correctly, go to the Terminal/command line/Command Prompt and run this command:</p>
+
+<p><code class="prettyprint">
+    $ cf -v
+</code></p>
+
+<p>You should get a message like this, confirming the version that&rsquo;s installed (it may not be this exact version):</p>
+<pre class="highlight plaintext"><code>cf version 6.18.1+a1103f0-2016-05-24
+</code></pre>
+
+<aside class="notice">Depending on your network configuration you might need to [set an &ldquo;`HTTP_PROXY&rdquo;` environment variable](https://docs.cloudfoundry.org/cf-cli/http-proxy.html) for the CLI to connect. Contact your network administrators to work out the correct settings for your configuration.</aside>
+
+<p>Log in by running:</p>
+
+<p><code class="prettyprint">
+    cf login -a api.cloud.service.gov.uk -u USERNAME
+</code></p>
+
+<p>Your <code class="prettyprint">USERNAME</code> is your email address your account was created with.</p>
+
+<p>You will then be prompted to enter your password, which should have been sent to you by email (subject &ldquo;Welcome to the Government PaaS&rdquo;).</p>
+
+<ol>
+<li><p><strong>It&rsquo;s important for security that you now change your password</strong>. Run:</p>
+
+<p><code class="prettyprint">cf passwd</code></p>
+
+<p>You will be prompted to enter your password from the previous step. You can then choose a new password.</p></li>
+</ol>
+
+<p>Once logged in, you can see the available commands by running <code class="prettyprint">cf</code>.</p>
+
+<h2 id="deploying-a-test-app"> Deploying a test app</h2>
+
+<p>To practice deploying an app, try following the <a href="/deploying_apps/deploying_static_sites/">deploying a static site</a> process.</p>
+
+          <h1 id="example-with-code">Example with code</h1>
+
+<p>This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide <a href="http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Getting Started Deploying Ruby on Rails Apps</a>. </p>
+
+<p>These steps assume you have already carried out the setup process explained in the <a href="/getting_started/quick_setup_guide">Quick Setup Guide</a> section.</p>
+
+<p>When you deploy an app, you must select a combination of an organisation and a space (see <a href="/deploying_apps/orgs_spaces_targets">Orgs and spaces</a> for more information). This is called the <strong>target</strong>.</p>
+
+<h2 id="code-excerpts-only-work-just-after-a-header">Code excerpts only work just after a header</h2>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">HelloWorld</span>
+   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+      <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">capitalize</span>
+   <span class="k">end</span>
+   <span class="k">def</span> <span class="nf">sayHi</span>
+      <span class="nb">puts</span> <span class="s2">"Hello </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">!"</span>
+   <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">hello</span> <span class="o">=</span> <span class="no">HelloWorld</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"World"</span><span class="p">)</span>
+<span class="n">hello</span><span class="p">.</span><span class="nf">sayHi</span>
+</code></pre>
+
+<aside class="note">If you have a code excerpt or command that&rsquo;s not just after a header, it&rsquo;s not clear where it comes in the text. So the three-column layout isn&rsquo;t much use for the kind of docs I&rsquo;m writing. See lower on this page for what I mean.</aside>
+
+<p>We have provided a <code class="prettyprint">sandbox</code> space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:</p>
+
+<p><code class="prettyprint">$ cf target -s sandbox</code></p>
+
+<aside class="warning">If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.</aside>
+
+<p>Note that the only database service currently supported by PaaS is PostgreSQL. If your Rails app requires a database, it must be able to work with PostgreSQL.</p>
+
+<p>Check out your Rails app to a local folder.</p>
+
+<p><a href="/deploying_apps/excluding_files/">Exclude files ignored by Git</a>.</p>
+
+<p><a href="https://github.com/heroku/rails_12factor#install">Add the <code class="prettyprint">rails_12factor</code> gem</a> for better logging.</p>
+
+<p>Create a manifest.yml file in the folder where you checked out your app.</p>
+<pre class="highlight ruby"><code><span class="o">---</span>
+    <span class="ss">applications:
+    </span><span class="o">-</span> <span class="ss">name: </span><span class="n">my</span><span class="o">-</span><span class="n">rails</span><span class="o">-</span><span class="n">app</span>
+      <span class="ss">memory: </span><span class="mi">256</span><span class="no">M</span>
+      <span class="ss">buildpack: </span><span class="n">ruby_buildpack</span>
+</code></pre>
+
+<p>Replace <code class="prettyprint">my-rails-app</code> with a unique name for your app. (You can use <code class="prettyprint">cf apps</code> to see apps which already exist).</p>
+
+<p>The <code class="prettyprint">memory</code> line tells the PaaS how much memory to allocate to the app.</p>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code class="prettyprint">ruby_buildpack</code>.</p>
+
+<p>Create the application using Cloud Foundry:</p>
+<pre class="highlight plaintext"><code>$ cf push  
+</code></pre>
+
+<p>from the folder where you checked out your app.</p>
+
+<p>If you do not specify a name for the app after the <code class="prettyprint">cf push</code> command, the name from the manifest file is used.</p>
+
+<ol>
+<li>Set any additional <a href="//deploying_apps/#setting-environment-variables/">environment variables</a> required by your app. For example:</li>
+</ol>
+<pre class="highlight plaintext"><code>$ cf set-env APPNAME VARIABLE `value`
+</code></pre>
+
+<p>where VARIABLE is a unique name for the variable, and <code class="prettyprint">value</code> is the value to set.</p>
+
+<ol>
+<li>If your app requires a database, <a href="/deploying_services/postgres/">create a PostgreSQL backing service and bind it to your app</a>. 
+The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the <code class="prettyprint">VCAP_SERVICES</code> environment variable and sets the Ruby DATABASE_URL accordingly.</li>
+</ol>
+
+<p>Your app should now be live at <code class="prettyprint">https://APPNAME.cloudapps.digital</code>!</p>
+
+<p>For a production site, you should run at least two instances of the app to ensure availability.</p>
+
+<p>You can add another instance of your app by running:</p>
+
+<p><code class="prettyprint">$ cf scale APPNAME -i 2</code></p>
+
+<h2 id="troubleshooting-asset-precompilation">Troubleshooting asset precompilation</h2>
+
+<p>By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for
+most Rails apps, but it won&rsquo;t work for those which need to connect to services (such as the database)
+during asset compilation. (For an example, see <a href="https://github.com/18F/myusa/issues/636">MyUSA issue #636</a>)</p>
+
+<p>There are multiple potential solutions for this. For more advice, see
+<a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html#precompile">the Cloud Foundry document on the subject</a>.</p>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="limitations">Limitations</h1>
+
+<p>While the Government PaaS is built using Cloud Foundry technology, we don&rsquo;t  support all Cloud Foundry features. This section explains some Cloud Foundry features that are not enabled, as well as some limitations of the beta phase.</p>
+
+<h2 id="custom-buildpacks-are-not-supported">Custom buildpacks are not supported</h2>
+
+<p>Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages. </p>
+
+<p>Government PaaS does not support <a href="https://docs.cloudfoundry.org/buildpacks/custom.html">custom buildpacks</a>, only the <a href="https://docs.cloudfoundry.org/buildpacks/">standard buildpacks</a>.</p>
+
+<p>If you want to use a custom buildpack because you need a newer version of a runtime or framework, please note that we update the standard buildpacks on a regular basis (approximately monthly).</p>
+
+<p>If you&rsquo;d like to use custom buildpacks, please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h2 id="direct-ssh-access-is-currently-disabled">Direct SSH access is currently disabled</h2>
+
+<p>The Cloud Foundry command line client has an option to enable you to connect directly to the virtual machines on which your apps run using <code class="prettyprint">cf ssh</code>. (See the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html">Cloud Foundry documentation on accessing apps with SSH</a>.</p>
+
+<p>This functionality is currently disabled on the Government PaaS. We intend to make it available in future, following security testing.</p>
+
+<h2 id="404s-after-push-or-restart">404s after push or restart</h2>
+
+<p>After you use <code class="prettyprint">cf push</code> or <code class="prettyprint">cf restart</code>, your app may briefly return incorrect 404 errors. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.</p>
+
+<p>We are working on a fix to prevent this happening.</p>
+
+<p>In the meantime, we suggest that you use a <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html">blue-green deployment process</a>, where you have two versions of an app, one that is &lsquo;live&rsquo; and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We haven&rsquo;t evaluated the available plugins in enough detail to recommend one, but some tenants have successfully used <a href="https://github.com/contraband/autopilot">autopilot</a>.</p>
+
+<h2 id="api-access-may-have-brief-outages-during-beta">API access may have brief outages during beta</h2>
+
+<p>During the beta period, there may be occasional brief periods where API access is unavailable during a platform update, causing commands sent from the command line client to fail. </p>
+
+<p>If you find that a valid command is failing and the error message does not explain the problem, please wait 5 minutes before trying the command again. If the error persists for more than 5 minutes, it is unlikely to be caused by a platform update and you should contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<p>We are working on a fix to prevent the interruption of API access when we update the platform.</p>
+
+<h2 id="deploying-docker-images-is-not-currently-enabled">Deploying Docker images is not currently enabled</h2>
+
+<p>Cloud Foundry supports pushing a <a href="https://www.docker.com/">Docker</a> image as an app. </p>
+
+<p>This feature is <em>not</em> currently enabled on the Government PaaS because allowing deployment from Docker images, where the root filesystem is controlled by the tenant, raises additional security concerns: see <a href="https://github.com/cloudfoundry/diego-design-notes/blob/c59e475020a22e244c6074f89c45b55f7b1e2867/docker-support.md#docker-in-a-multi-tenant-world">this note from the CF developers</a> for more details.</p>
+
+<p>We may enable support for Docker images in the future. If you would like to be able to push Docker images, please contact our support team at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>, providing details of your use case.</p>
+
+<h2 id="route-services-are-currently-disabled">Route services are currently disabled</h2>
+
+<p><a href="http://docs.cloudfoundry.org/services/route-services.html">Cloud Foundry route services</a> are used to apply transformation or processing to requests before they reach an application.</p>
+
+<p>Route services are currently disabled on Government PaaS. If you&rsquo;d like to discuss your use case for route services and possible workarounds, please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a></p>
+
+          <h1 id="privacy-policy">Privacy Policy</h1>
+
+<p>This privacy policy relates to the data we store about you as a Government PaaS tenant. It does not relate to the privacy of the end users of any service you host on the PaaS: you are responsible for the data stored by your service.</p>
+
+<p>If this privacy policy changes, all PaaS tenants will be notified.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Government Platform as a Service (PaaS) is provided by the Government Digital Service (GDS), which is part of the <a href="https://www.gov.uk/government/organisations/cabinet-office">Cabinet Office</a>. We use your personal data to provide you with access to PaaS systems, and to administer that access.</p>
+
+<p>This privacy policy explains the kinds of data that we process, how it’s used, how it’s stored, how it’s protected and how you can find out about it.</p>
+
+<h2 id="the-data-we-process">The data we process</h2>
+
+<p>We collect and process some data about you to provide you with access to PaaS systems, as part of your work on HMG services and products that utilise the PaaS platform.</p>
+
+<p>This data includes:</p>
+
+<ul>
+<li>your name - so we know who is using the account</li>
+<li>your email address - which allows us to contact you about your account</li>
+<li>your mobile telephone number - which allows us to contact you about your account, and in future, support multi-factor authentication</li>
+<li>your organisational role - which allows us to understand what you do, and what access you should have</li>
+</ul>
+
+<h2 id="how-we-use-and-share-your-data">How we use and share your data</h2>
+
+<p>We use this information to create and administer user accounts with our platform.</p>
+
+<p>We don’t share this information with anyone else.</p>
+
+<p>We will store the data you provide in order for your user account with PaaS to function correctly, and so we can administer that access - including sending you updates and notices.</p>
+
+<p>We will delete your personal data when your user account is no longer required. We keep records of the user account activity for up to an additional 2 years.</p>
+
+<h2 id="where-we-store-your-data">Where we store your data</h2>
+
+<p>We store your data on our servers in the European Union. We’ll never transfer or your data on servers outside of the European Economic Area.</p>
+
+<p>This means you are covered by EU Data Protection regulations. </p>
+
+<h2 id="keeping-your-data-secure">Keeping your data secure</h2>
+
+<p>We are committed to protecting the information you provide. We ensure that appropriate steps are taken to prevent the disclosure, theft or unauthorised modification of your information. We understand how important it is to protect personal data and other sensitive information. This includes encrypting the data, as well as ensuring that data is sent via encrypted channels (such as Transport Layer Security). We have procedures and security features in place to try and keep your data secure once we receive it.</p>
+
+<p>Because it’s impossible to guarantee data security, any data you transmit is at your own risk.</p>
+
+<p>We won’t share your information with any other organisations for marketing, market research or commercial purposes, and we will only share your information with other organisations to make it possible to facilitate and administer platform functionality.</p>
+
+<h2 id="disclosing-your-information">Disclosing your information</h2>
+
+<p>We will usually only share your information as set out above.</p>
+
+<p>Additionally, we may pass on your data if we have a lawful reason to do so, for example as part of a criminal investigation or fraud prevention activity.</p>
+
+<h2 id="your-rights-and-how-to-make-a-complaint">Your rights and how to make a complaint</h2>
+
+<p>You can <a href="https://www.gov.uk/data-protection">find out what information we hold about you</a>, and ask us not to use any of the information we collect.</p>
+
+<p>You can email us on <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>. You’ll get a confirmation within 5 working days that we have received your complaint, and a full answer within 20 working days. We will inform you if there’s going to be a delay.</p>
+
+<p>If you’re unhappy with the answer you receive, or need any advice regarding the use of your personal data, you can contact the Information Commissioner’s Office (ICO), <a href="https://ico.org.uk/">https://ico.org.uk/</a>.</p>
+
+          <h1 id="api-listing">API Listing</h1>
+
+<p>This content was generated from a Swagger file using swagger2markup.</p>
+
+<p>Note that an interactive API explorer could be added using SwaggerUI.</p>
+
+<p><a name="overview"></a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>GOV.UK Pay API.</p>
+
+<h3 id="version-information">Version information</h3>
+
+<p><em>Version</em> : 1.0.0</p>
+
+<h3 id="uri-scheme">URI scheme</h3>
+
+<p><em>Host</em> : publicapi.pymnt.uk<br>
+<em>Schemes</em> : HTTPS</p>
+
+<p><a name="definitions"></a></p>
+
+<h2 id="definitions">Definitions</h2>
+
+<p><a name="createpaymentrequest"></a></p>
+
+<h3 id="createpaymentrequest">CreatePaymentRequest</h3>
+
+<p>The Payment Request Payload</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>amount</strong>  <br><em>required</em></td>
+<td>amount in pence  <br><strong>Example</strong> : <code class="prettyprint">12000</code></td>
+<td>integer(int32)</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>required</em></td>
+<td>payment description  <br><strong>Example</strong> : <code class="prettyprint">&quot;New passport application&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>reference</strong>  <br><em>required</em></td>
+<td>payment reference  <br><strong>Example</strong> : <code class="prettyprint">&quot;12345&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>return_url</strong>  <br><em>required</em>  <br><em>read-only</em></td>
+<td>service return url  <br><strong>Example</strong> : <code class="prettyprint">&quot;https://service-name.gov.uk/transactions/12345&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="payment-error"></a></p>
+
+<h3 id="payment-error">Payment Error</h3>
+
+<p>A Payment Error response</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>code</strong>  <br><em>optional</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;P0102&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>optional</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;Invalid attribute value: amount. Must be less than or equal to 10000000&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>field</strong>  <br><em>optional</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;amount&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="payment-event-information"></a></p>
+
+<h3 id="payment-event-information">Payment Event information</h3>
+
+<p>A List of Payment Events information</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>_links</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#payment-event-link">payment-event-link</a></td>
+</tr>
+<tr>
+<td><strong>payment_id</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;hu20sqlact5260q2nanm0q8u93&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>state</strong>  <br><em>optional</em></td>
+<td>state</td>
+<td><a href="#payment-state">Payment state</a></td>
+</tr>
+<tr>
+<td><strong>updated</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td>updated  <br><strong>Example</strong> : <code class="prettyprint">&quot;updated_date&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="payment-state"></a></p>
+
+<h3 id="payment-state">Payment state</h3>
+
+<p>A structure representing the current state of the payment in its lifecycle.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>code</strong>  <br><em>required</em>  <br><em>read-only</em></td>
+<td>What went wrong with the Payment if it finished with an error - error code  <br><strong>Example</strong> : <code class="prettyprint">&quot;P010&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>finished</strong>  <br><em>required</em>  <br><em>read-only</em></td>
+<td>Whether the payment has finished  <br><strong>Default</strong> : <code class="prettyprint">false</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><strong>message</strong>  <br><em>required</em>  <br><em>read-only</em></td>
+<td>What went wrong with the Payment if it finished with an error - English message  <br><strong>Example</strong> : <code class="prettyprint">&quot;User cancelled the payment&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>status</strong>  <br><em>required</em>  <br><em>read-only</em></td>
+<td>Current progress of the payment in its lifecycle  <br><strong>Example</strong> : <code class="prettyprint">&quot;created&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="paymenteventsinformation"></a></p>
+
+<h3 id="paymenteventsinformation">PaymentEventsInformation</h3>
+
+<p>A List of Payment Events information</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>_links</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#linksforevents">linksForEvents</a></td>
+</tr>
+<tr>
+<td><strong>events</strong>  <br><em>optional</em></td>
+<td></td>
+<td>&lt; <a href="#payment-event-information">Payment Event information</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>payment_id</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;hu20sqlact5260q2nanm0q8u93&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="paymentforsearchresult"></a></p>
+
+<h3 id="paymentforsearchresult">PaymentForSearchResult</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>_links</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#linksforsearchresults">linksForSearchResults</a></td>
+</tr>
+<tr>
+<td><strong>amount</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">1200</code></td>
+<td>integer(int64)</td>
+</tr>
+<tr>
+<td><strong>created_date</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;2016-01-21T17:15:00Z&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;Your Service Description&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>payment_id</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;hu20sqlact5260q2nanm0q8u93&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>payment_provider</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;worldpay&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>reference</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;your-reference&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>return_url</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;http://your.service.domain/your-reference&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>state</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#payment-state">Payment state</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="paymentsearchresults"></a></p>
+
+<h3 id="paymentsearchresults">PaymentSearchResults</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>results</strong>  <br><em>optional</em></td>
+<td></td>
+<td>&lt; <a href="#paymentforsearchresult">PaymentForSearchResult</a> &gt; array</td>
+</tr>
+</tbody></table>
+
+<p><a name="paymentwithalllinks"></a></p>
+
+<h3 id="paymentwithalllinks">PaymentWithAllLinks</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>_links</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#alllinksforapayment">allLinksForAPayment</a></td>
+</tr>
+<tr>
+<td><strong>amount</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">1200</code></td>
+<td>integer(int64)</td>
+</tr>
+<tr>
+<td><strong>created_date</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;2016-01-21T17:15:00Z&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;Your Service Description&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>payment_id</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;hu20sqlact5260q2nanm0q8u93&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>payment_provider</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;worldpay&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>reference</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;your-reference&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>return_url</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;http://your.service.domain/your-reference&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>state</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="#payment-state">Payment state</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="alllinksforapayment"></a></p>
+
+<h3 id="alllinksforapayment">allLinksForAPayment</h3>
+
+<p>self,events and next links of a Payment</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>cancel</strong>  <br><em>optional</em></td>
+<td>cancel</td>
+<td><a href="#paymentpostlink">paymentPOSTLink</a></td>
+</tr>
+<tr>
+<td><strong>events</strong>  <br><em>optional</em></td>
+<td>events</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+<tr>
+<td><strong>next_url</strong>  <br><em>optional</em></td>
+<td>next_url</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+<tr>
+<td><strong>next_url_post</strong>  <br><em>optional</em></td>
+<td>next_url_post</td>
+<td><a href="#paymentpostlink">paymentPOSTLink</a></td>
+</tr>
+<tr>
+<td><strong>self</strong>  <br><em>optional</em></td>
+<td>self</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="linksforevents"></a></p>
+
+<h3 id="linksforevents">linksForEvents</h3>
+
+<p>links for events resource</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>self</strong>  <br><em>optional</em></td>
+<td>self</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="linksforsearchresults"></a></p>
+
+<h3 id="linksforsearchresults">linksForSearchResults</h3>
+
+<p>links for search payment resource</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>cancel</strong>  <br><em>optional</em></td>
+<td>cancel</td>
+<td><a href="#paymentpostlink">paymentPOSTLink</a></td>
+</tr>
+<tr>
+<td><strong>events</strong>  <br><em>optional</em></td>
+<td>events</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+<tr>
+<td><strong>self</strong>  <br><em>optional</em></td>
+<td>self</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="payment-event-link"></a></p>
+
+<h3 id="payment-event-link">payment-event-link</h3>
+
+<p>Resource link for a payment of a payment event</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>payment_url</strong>  <br><em>optional</em></td>
+<td>payment_url</td>
+<td><a href="#paymentlink">paymentLink</a></td>
+</tr>
+</tbody></table>
+
+<p><a name="paymentlink"></a></p>
+
+<h3 id="paymentlink">paymentLink</h3>
+
+<p>A link related to a payment</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>href</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;https://an.example.link/from/payment/platform&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>method</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;GET&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="paymentpostlink"></a></p>
+
+<h3 id="paymentpostlink">paymentPOSTLink</h3>
+
+<p>A POST link related to a payment</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>href</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;https://an.example.link/from/payment/platform&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>method</strong>  <br><em>optional</em>  <br><em>read-only</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;POST&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>params</strong>  <br><em>optional</em></td>
+<td></td>
+<td>&lt; string, object &gt; map</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>optional</em></td>
+<td><strong>Example</strong> : <code class="prettyprint">&quot;multipart/form-data&quot;</code></td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><a name="paths"></a></p>
+
+<h2 id="paths">Paths</h2>
+
+<p><a name="newpayment"></a></p>
+
+<h3 id="create-new-payment">Create new payment</h3>
+<pre class="highlight plaintext"><code>POST /v1/payments
+</code></pre>
+
+<h4 id="description">Description</h4>
+
+<p>Create a new payment for the account associated to the Authorisation token. The Authorisation token needs to be specified in the &lsquo;authorization&rsquo; header as &#39;authorization: Bearer YOUR_API_KEY_HERE&rsquo;</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>body</strong>  <br><em>required</em></td>
+<td>requestPayload</td>
+<td><a href="#createpaymentrequest">CreatePaymentRequest</a></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="responses">Responses</h4>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>201</strong></td>
+<td>Created</td>
+<td><a href="#paymentwithalllinks">PaymentWithAllLinks</a></td>
+</tr>
+<tr>
+<td><strong>400</strong></td>
+<td>Bad request</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Credentials are required to access this resource</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>422</strong></td>
+<td>Invalid attribute value: description. Must be less than or equal to 255 characters length</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Downstream system error</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="consumes">Consumes</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+<h4 id="produces">Produces</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+<p><a name="searchpayments"></a></p>
+
+<h3 id="search-payments">Search payments</h3>
+<pre class="highlight plaintext"><code>GET /v1/payments
+</code></pre>
+
+<h4 id="description">Description</h4>
+
+<p>Search payments by reference, state, &#39;from&rsquo; and &#39;to&rsquo; date. The Authorisation token needs to be specified in the &#39;authorization&rsquo; header as &#39;authorization: Bearer YOUR_API_KEY_HERE&rsquo;</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>display_size</strong>  <br><em>optional</em></td>
+<td>Number of results to be shown per page, should be a positive integer (optional, defaults to 500)</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>from_date</strong>  <br><em>optional</em></td>
+<td>From date of payments to be searched (this date is inclusive). Example=2015-08-13T12:35:00Z</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>page</strong>  <br><em>optional</em></td>
+<td>Page number requested for the search, should be a positive integer (optional, defaults to 1)</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>reference</strong>  <br><em>optional</em></td>
+<td>Your payment reference to search</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>state</strong>  <br><em>optional</em></td>
+<td>State of payments to be searched. Example=success</td>
+<td>enum (range[created, started, submitted, success, failed, cancelled, error)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>to_date</strong>  <br><em>optional</em></td>
+<td>To date of payments to be searched (this date is exclusive). Example=2015-08-14T12:35:00Z</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="responses">Responses</h4>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>OK</td>
+<td><a href="#paymentsearchresults">PaymentSearchResults</a></td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Credentials are required to access this resource</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>422</strong></td>
+<td>Invalid parameters: from_date, to_date, status. See Public API documentation for the correct data formats</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Downstream system error</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="produces">Produces</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+<p><a name="getpayment"></a></p>
+
+<h3 id="find-payment-by-id">Find payment by ID</h3>
+<pre class="highlight plaintext"><code>GET /v1/payments/{paymentId}
+</code></pre>
+
+<h4 id="description">Description</h4>
+
+<p>Return information about the payment The Authorisation token needs to be specified in the &#39;authorization&rsquo; header as &#39;authorization: Bearer YOUR_API_KEY_HERE&rsquo;</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>paymentId</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="responses">Responses</h4>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>OK</td>
+<td><a href="#paymentwithalllinks">PaymentWithAllLinks</a></td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Credentials are required to access this resource</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>Not found</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Downstream system error</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="produces">Produces</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+<p><a name="cancelpayment"></a></p>
+
+<h3 id="cancel-payment">Cancel payment</h3>
+<pre class="highlight plaintext"><code>POST /v1/payments/{paymentId}/cancel
+</code></pre>
+
+<h4 id="description">Description</h4>
+
+<p>Cancel a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the &#39;authorization&rsquo; header as &#39;authorization: Bearer YOUR_API_KEY_HERE&rsquo;. A payment can only be cancelled if it&rsquo;s in a state that isn&rsquo;t finished.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>paymentId</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="responses">Responses</h4>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>204</strong></td>
+<td>No Content</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>400</strong></td>
+<td>Cancellation of payment failed</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Credentials are required to access this resource</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>Not found</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Downstream system error</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="produces">Produces</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+<p><a name="getpaymentevents"></a></p>
+
+<h3 id="return-payment-events-by-id">Return payment events by ID</h3>
+<pre class="highlight plaintext"><code>GET /v1/payments/{paymentId}/events
+</code></pre>
+
+<h4 id="description">Description</h4>
+
+<p>Return payment events information about a certain payment The Authorisation token needs to be specified in the &#39;authorization&rsquo; header as &#39;authorization: Bearer YOUR_API_KEY_HERE&rsquo;</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>paymentId</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="responses">Responses</h4>
+
+<table><thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>OK</td>
+<td><a href="#paymenteventsinformation">PaymentEventsInformation</a></td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Credentials are required to access this resource</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>Not found</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Downstream system error</td>
+<td><a href="#payment-error">Payment Error</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="produces">Produces</h4>
+
+<ul>
+<li><code class="prettyprint">application/json</code></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="CF cli">CF cli</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
