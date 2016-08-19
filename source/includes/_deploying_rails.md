@@ -8,7 +8,7 @@ These steps assume you have already carried out the setup process explained in t
 
 When you deploy an app, you must select a combination of an organisation and a space (see [Orgs and spaces](/deploying_apps/orgs_spaces_targets) for more information). This is called the **target**.
 
-## Code excerpts only work just after a header
+## Code excerpts only work right just after a header
 
 ```ruby
 class HelloWorld
@@ -56,21 +56,23 @@ The `memory` line tells the PaaS how much memory to allocate to the app.
 
 A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the ``ruby_buildpack``.
 
-Create the application using Cloud Foundry:
+<aside class="note">The content below is numbered steps, but numbers are not currently being rendered. Also notice how code is rendered within a step - not good.</aside>
 
-```
-$ cf push  
-```
+1. Create the application using Cloud Foundry:
 
-from the folder where you checked out your app.
+    ```
+    $ cf push  
+    ```
 
-If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
+    from the folder where you checked out your app.
+
+    If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
 1. Set any additional [environment variables](//deploying_apps/#setting-environment-variables/) required by your app. For example:
 
-```
-$ cf set-env APPNAME VARIABLE `value`
-```
+    ```
+    $ cf set-env APPNAME VARIABLE `value`
+    ```
 
 where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
