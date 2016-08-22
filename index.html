@@ -129,6 +129,12 @@
 
 <aside class="notice">This is not live documentation. Some extracts from documentation for GOV.UK services have been used for illustration purposes, but these may be wrong or out of date. Look at the official documentation for the service you are using.</aside> 
 
+<h1 id="image-test">Image test</h1>
+
+<p>Here is an image:</p>
+
+<p><img alt="ex-PM" src="images/examples/pm.jpg" /></p>
+
           <p>To be hosted by Government PaaS, your application must:</p>
 
 <ul>
@@ -289,7 +295,7 @@
 
 <p>When you deploy an app, you must select a combination of an organisation and a space (see <a href="/deploying_apps/orgs_spaces_targets">Orgs and spaces</a> for more information). This is called the <strong>target</strong>.</p>
 
-<h2 id="code-excerpts-only-work-just-after-a-header">Code excerpts only work just after a header</h2>
+<h2 id="code-excerpts-only-work-right-just-after-a-header">Code excerpts only work right just after a header</h2>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">HelloWorld</span>
    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
       <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">capitalize</span>
@@ -333,19 +339,20 @@
 
 <p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code class="prettyprint">ruby_buildpack</code>.</p>
 
-<p>Create the application using Cloud Foundry:</p>
+<aside class="note">The content below is numbered steps, but numbers are not currently being rendered. Also notice how code is rendered within a step - not good.</aside>
+
+<ol>
+<li><p>Create the application using Cloud Foundry:</p>
 <pre class="highlight plaintext"><code>$ cf push  
 </code></pre>
 
 <p>from the folder where you checked out your app.</p>
 
-<p>If you do not specify a name for the app after the <code class="prettyprint">cf push</code> command, the name from the manifest file is used.</p>
-
-<ol>
-<li>Set any additional <a href="//deploying_apps/#setting-environment-variables/">environment variables</a> required by your app. For example:</li>
-</ol>
+<p>If you do not specify a name for the app after the <code class="prettyprint">cf push</code> command, the name from the manifest file is used.</p></li>
+<li><p>Set any additional <a href="//deploying_apps/#setting-environment-variables/">environment variables</a> required by your app. For example:</p>
 <pre class="highlight plaintext"><code>$ cf set-env APPNAME VARIABLE `value`
-</code></pre>
+</code></pre></li>
+</ol>
 
 <p>where VARIABLE is a unique name for the variable, and <code class="prettyprint">value</code> is the value to set.</p>
 
