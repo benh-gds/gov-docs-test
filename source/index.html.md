@@ -32,4 +32,7 @@ Here is an image:
 
 ![ex-PM](/images/examples/pm.jpg)
 
+Here is a docs image:
+
+![overview](/images/arch_overviewGraphic.png)
 
