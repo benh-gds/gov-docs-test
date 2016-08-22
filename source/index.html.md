@@ -26,4 +26,10 @@ This is a prototype of how some technical docs would look, including API content
 
 <aside class="notice">This is not live documentation. Some extracts from documentation for GOV.UK services have been used for illustration purposes, but these may be wrong or out of date. Look at the official documentation for the service you are using.</aside> 
 
+# Image test
+
+Here is an image:
+
+![ex-PM](/images/examples/pm.jpg)
+
 
